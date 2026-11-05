@@ -558,10 +558,9 @@ ${passed ? '<div class="cert-passed">&#10003; '+t('passed')+'</div>' : ''}
                         <button id="nextBtn" class="next-btn" ${!state.showFeedback ? 'disabled' : ''}>
                             ${state.currentQuestion < questions.length - 1 ? t('next') : t('finish')}
                         </button>
-                        ${TOKEN ? '<button id="exitBtn2" type="button" style="display:block;width:100%;margin-top:10px;background:#fffbeb;border:2px solid #d97706;color:#92400e;border-radius:8px;padding:11px 16px;font-size:15px;font-weight:600;cursor:pointer">'+t('exitBtn')+'</button><p style="margin:6px 0 0;text-align:center;font-size:12px;color:#6b7280">'+(LANG==='es'?'Su progreso se guarda y puede continuar m\u00e1s tarde con el mismo enlace.':'Your progress is saved so you can finish later using the same link.')+'</p>' : ''}
+                        ${TOKEN ? '<div id="exitBox" style="margin-top:10px"><button id="exitBtn" type="button" style="display:block;width:100%;margin-top:10px;background:#fffbeb;border:2px solid #d97706;color:#92400e;border-radius:8px;padding:11px 16px;font-size:15px;font-weight:600;cursor:pointer">'+t('exitBtn')+'</button><p style="margin:6px 0 0;text-align:center;font-size:12px;color:#6b7280">'+(LANG==='es'?'Su progreso se guarda y puede continuar m\u00e1s tarde con el mismo enlace.':'Your progress is saved so you can finish later using the same link.')+'</p></div>' : ''}
                         </div>
-                    ${TOKEN ? '<div id="exitBox" style="text-align:center;margin:56px auto 24px;max-width:760px"><button id="exitBtn" style="background:#fffbeb;border:2px solid #d97706;color:#92400e;border-radius:6px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer">'+t('exitBtn')+'</button></div>' : ''}
-                </div>
+                                    </div>
             `;
             
             // Add event listeners after rendering
@@ -577,7 +576,6 @@ ${passed ? '<div class="cert-passed">&#10003; '+t('passed')+'</div>' : ''}
             });
             
             document.getElementById('nextBtn').addEventListener('click', handleNext);
-            var xb2=document.getElementById('exitBtn2'); if(xb2) xb2.addEventListener('click', function(){var eb=document.getElementById('exitBtn'); if(eb) eb.click();});
             var xb=document.getElementById('exitBtn'); if(xb) xb.addEventListener('click', function(){
                 var bx=document.getElementById('exitBox');
                 bx.innerHTML='<div style="display:inline-block;max-width:420px;padding:14px 16px;border:2px solid #d97706;border-radius:8px;background:#fffbeb;color:#78350f"><p style="margin:0 0 12px">'+t('exitAsk')+'</p><button id="exitYes" style="background:#d97706;color:#fff;border:0;border-radius:6px;padding:8px 14px;margin-right:8px;cursor:pointer">'+t('exitYes')+'</button><button id="exitNo" style="background:#fff;color:#78350f;border:1px solid #d97706;border-radius:6px;padding:8px 14px;cursor:pointer">'+t('exitNo')+'</button></div>';
