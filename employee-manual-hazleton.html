@@ -10,8 +10,7 @@ p{margin:0 0 7pt;text-indent:0}p.f{text-indent:0}
 @media print{@page{size:Letter;margin:1in}html body{padding:0;max-width:none}.cover{min-height:9in;page-break-after:always;margin:0}.toc{page-break-after:always;margin:0}.ack{page-break-before:always}}
 .cover img{width:4.1in!important;max-width:100%!important;height:auto!important}
 #pbar,#book{display:none}
-@media (max-width:919px){html body{padding:14px 16px 64px}.cover{min-height:78vh;padding:20px 14px}.cover .ti{font-size:21pt}.toc .e.l2{padding-left:.2in}}
-html.paged body{background:#dde3ee;padding:28px 0 80px;max-width:none}
+html.paged body{background:#dde3ee;padding:20px 0 80px;max-width:none;overflow-x:hidden}
 html.paged #book{display:flex;flex-direction:column;align-items:center;gap:28px}
 .sheet{position:relative;width:8.5in;height:11in;background:#fff;box-sizing:border-box;overflow:hidden;box-shadow:0 1px 2px rgba(20,30,60,.2),0 12px 32px rgba(20,30,60,.2);border-radius:2px}
 .sheet::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#2B3A8C,#4f68cf)}
@@ -49,7 +48,6 @@ function upd(){
  }else pc.innerHTML="<b>"+Math.round(st/mx*100)+"%</b> read";
 }
 window.addEventListener("scroll",upd,{passive:true});window.addEventListener("resize",upd);
-if(window.innerWidth<920){upd();return;}
 var st=document.createElement("style");st.textContent="@page{size:Letter;margin:0}";document.head.appendChild(st);
 function sheet(kind){var s=document.createElement("section");s.className="sheet "+kind;s.innerHTML='<div class="sh"></div><div class="sb"></div><div class="sf"><span>Blue Mountain Home Health Care, Inc.</span><a href="#toc">Back to contents</a></div>';book.appendChild(s);sheets.push(s);return s;}
 var nodes=[],n=toc.nextElementSibling;
@@ -75,7 +73,8 @@ document.querySelectorAll(".toc .e").forEach(function(e){
  var l=document.createElement("span");l.className="lead";var p=document.createElement("a");p.className="pg";p.href="#"+id;p.textContent=pageOf(id);
  e.appendChild(l);e.appendChild(p);
 });
-window.addEventListener("resize",function(){if(window.innerWidth<920)location.reload();});
+function fit(){var z=Math.min(1,(document.documentElement.clientWidth-16)/816);book.style.zoom=z;upd();}
+window.addEventListener("resize",fit);fit();
 if(location.hash){var t=document.getElementById(location.hash.slice(1));if(t)t.scrollIntoView();}
 upd();
 })();
